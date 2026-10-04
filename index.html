@@ -268,7 +268,18 @@
             <h3>🖼️ Gallery (ছবি ও ভিডিও) Add/Delete</h3>
             <div class="card" style="margin-top:15px;">
                 <div class="form-group"><label>টাইটেল</label><input type="text" id="add-gal-title"></div>
-                <div class="form-group"><label>ছবি বা ইউটিউব ভিডিও লিংক</label><input type="text" id="add-gal-url"></div>
+                
+                <!-- ডিভাইসের ছবি বা অনলাইন লিঙ্ক উভয় সুবিধা অন্তর্ভুক্ত করা হয়েছে -->
+                <div class="form-group">
+                    <label>ডিভাইস থেকে ছবি আপলোড করুন</label>
+                    <input type="file" id="add-gal-file" accept="image/*">
+                </div>
+                <p style="text-align: center; font-weight: bold; margin: 5px 0;">অথবা</p>
+                <div class="form-group">
+                    <label>ছবি বা ইউটিউব ভিডিও এর অনলাইন ইউআরএল (URL)</label>
+                    <input type="text" id="add-gal-url" placeholder="https://example.com/image.jpg">
+                </div>
+                
                 <button onclick="addGalleryItem()" class="btn-gold">গ্যালারিতে যুক্ত করুন</button>
             </div>
             <h4 style="margin-top:15px;">গ্যালারি আইটেমসমূহ</h4>
@@ -317,43 +328,59 @@
     </div>
 
     <script>
-        // GLOBAL DATA STORE
-        let currentAdminPass = "admin123";
-
-        let homeData = {
+        // Default Data Setup
+        const defaultAdminPass = "admin123";
+        const defaultHomeData = {
             title: "বাহাদির পাড়া স্পোর্টস কাউন্সিলে স্বাগতম",
             subtitle: "খেলাধুলার মাধ্যমে সুস্থ দেহ, সুন্দর মন ও সুসংগঠিত সমাজ গড়ার প্রত্যয়ে আমাদের যাত্রা।"
         };
-
-        let historyData = "বাহাদির পাড়া স্পোর্টস কাউন্সিল এলাকার ক্রীড়াপ্রেমী মানুষদের উদ্যোগে গঠিত একটি ঐতিহ্যবাহী সংগঠন।";
-
-        let committee = [
+        const defaultHistoryData = "বাহাদির পাড়া স্পোর্টস কাউন্সিল এলাকার ক্রীড়াপ্রেমী মানুষদের উদ্যোগে গঠিত একটি ঐতিহ্যবাহী সংগঠন।";
+        const defaultCommittee = [
             { id: 1, name: "মোঃ রফিকুল ইসলাম", role: "সভাপতি" },
             { id: 2, name: "আহমেদ জাহিদ", role: "সেক্রেটারি" }
         ];
-
-        let members = [
+        const defaultMembers = [
             { id: 101, name: "সাকিব হাসান", role: "সদস্য (#101)" },
             { id: 102, name: "তামিম আহমেদ", role: "সদস্য (#102)" }
         ];
-
-        let gallery = [
+        const defaultGallery = [
             { id: 1, title: "ফুটবল টুর্নামেন্ট", url: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=400&q=80" }
         ];
-
-        let notices = [
+        const defaultNotices = [
             { id: 1, title: "বার্ষিক ফুটবল টুর্নামেন্ট ২০২৬", date: "অক্টোবর ২০২৬", body: "রেজিস্ট্রেশন ফরম জমা নেওয়া শুরু হয়েছে।" }
         ];
-
-        let applications = [];
-
-        let contactData = {
+        const defaultApplications = [];
+        const defaultContactData = {
             phone: "+880 1700-000000",
             email: "info@bahadirparasports.com",
             address: "বাহাদির পাড়া, ঢাকা, বাংলাদেশ",
             fb: "https://facebook.com",
             yt: "https://youtube.com"
         };
+
+        // Load Initial State from LocalStorage
+        let currentAdminPass = localStorage.getItem('bpsc_adminPass') || defaultAdminPass;
+        let homeData = JSON.parse(localStorage.getItem('bpsc_homeData')) || defaultHomeData;
+        let historyData = localStorage.getItem('bpsc_historyData') || defaultHistoryData;
+        let committee = JSON.parse(localStorage.getItem('bpsc_committee')) || defaultCommittee;
+        let members = JSON.parse(localStorage.getItem('bpsc_members')) || defaultMembers;
+        let gallery = JSON.parse(localStorage.getItem('bpsc_gallery')) || defaultGallery;
+        let notices = JSON.parse(localStorage.getItem('bpsc_notices')) || defaultNotices;
+        let applications = JSON.parse(localStorage.getItem('bpsc_applications')) || defaultApplications;
+        let contactData = JSON.parse(localStorage.getItem('bpsc_contactData')) || defaultContactData;
+
+        // Helper function to Save Data to LocalStorage
+        function saveDataToLocalStorage() {
+            localStorage.setItem('bpsc_adminPass', currentAdminPass);
+            localStorage.setItem('bpsc_homeData', JSON.stringify(homeData));
+            localStorage.setItem('bpsc_historyData', historyData);
+            localStorage.setItem('bpsc_committee', JSON.stringify(committee));
+            localStorage.setItem('bpsc_members', JSON.stringify(members));
+            localStorage.setItem('bpsc_gallery', JSON.stringify(gallery));
+            localStorage.setItem('bpsc_notices', JSON.stringify(notices));
+            localStorage.setItem('bpsc_applications', JSON.stringify(applications));
+            localStorage.setItem('bpsc_contactData', JSON.stringify(contactData));
+        }
 
         // Navigation
         function showPublicSection(id, e) {
@@ -409,8 +436,8 @@
             document.getElementById('adm-member-list').innerHTML = members.map(m => `<div class="card"><h4>${m.name}</h4><p>${m.role}</p><button onclick="deleteMember(${m.id})" class="btn-danger"><i class="fas fa-trash"></i> ডিলিট</button></div>`).join('');
 
             // Gallery
-            document.getElementById('pub-gallery-list').innerHTML = gallery.map(g => `<div class="card"><img src="${g.url}" style="width:100%; border-radius:5px;"><h4>${g.title}</h4></div>`).join('');
-            document.getElementById('adm-gallery-list').innerHTML = gallery.map(g => `<div class="card"><h4>${g.title}</h4><button onclick="deleteGallery(${g.id})" class="btn-danger"><i class="fas fa-trash"></i> ডিলিট</button></div>`).join('');
+            document.getElementById('pub-gallery-list').innerHTML = gallery.map(g => `<div class="card"><img src="${g.url}" style="width:100%; height:180px; object-fit:cover; border-radius:5px;"><h4>${g.title}</h4></div>`).join('');
+            document.getElementById('adm-gallery-list').innerHTML = gallery.map(g => `<div class="card"><h4>${g.title}</h4><img src="${g.url}" style="width:100%; height:100px; object-fit:cover; margin: 5px 0; border-radius:4px;"><br><button onclick="deleteGallery(${g.id})" class="btn-danger"><i class="fas fa-trash"></i> ডিলিট</button></div>`).join('');
 
             // Notice
             document.getElementById('pub-notice-list').innerHTML = notices.map(n => `<div class="card" style="margin-bottom:10px;"><span style="color:var(--accent-gold); font-size:12px;">${n.date}</span><h3>${n.title}</h3><p>${n.body}</p></div>`).join('');
@@ -441,12 +468,14 @@
         function saveHomeText() {
             homeData.title = document.getElementById('edit-home-title').value;
             homeData.subtitle = document.getElementById('edit-home-sub').value;
+            saveDataToLocalStorage();
             renderAllData();
             alert('Home পেইজ আপডেট করা হয়েছে!');
         }
 
         function saveHistory() {
             historyData = document.getElementById('edit-history').value;
+            saveDataToLocalStorage();
             renderAllData();
             alert('ইতিহাস সেভ করা হয়েছে!');
         }
@@ -457,10 +486,15 @@
             if(name) {
                 committee.push({ id: Date.now(), name, role });
                 document.getElementById('add-com-name').value = '';
+                saveDataToLocalStorage();
                 renderAllData();
             }
         }
-        function deleteCommittee(id) { committee = committee.filter(c => c.id !== id); renderAllData(); }
+        function deleteCommittee(id) { 
+            committee = committee.filter(c => c.id !== id); 
+            saveDataToLocalStorage();
+            renderAllData(); 
+        }
 
         function addMember() {
             const name = document.getElementById('add-mem-name').value;
@@ -469,22 +503,58 @@
                 members.push({ id: Date.now(), name, role: role || "সদস্য" });
                 document.getElementById('add-mem-name').value = '';
                 document.getElementById('add-mem-id').value = '';
+                saveDataToLocalStorage();
                 renderAllData();
             }
         }
-        function deleteMember(id) { members = members.filter(m => m.id !== id); renderAllData(); }
+        function deleteMember(id) { 
+            members = members.filter(m => m.id !== id); 
+            saveDataToLocalStorage();
+            renderAllData(); 
+        }
 
+        // Add Gallery Item (Handled File Upload & URL both)
         function addGalleryItem() {
             const title = document.getElementById('add-gal-title').value;
-            const url = document.getElementById('add-gal-url').value;
-            if(title && url) {
-                gallery.push({ id: Date.now(), title, url });
-                document.getElementById('add-gal-title').value = '';
-                document.getElementById('add-gal-url').value = '';
+            const urlInput = document.getElementById('add-gal-url').value;
+            const fileInput = document.getElementById('add-gal-file').files[0];
+
+            if (!title) {
+                alert('অনুগ্রহ করে টাইটেল দিন!');
+                return;
+            }
+
+            if (fileInput) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const imageUrl = e.target.result;
+                    gallery.push({ id: Date.now(), title, url: imageUrl });
+                    clearGalleryForm();
+                    saveDataToLocalStorage();
+                    renderAllData();
+                };
+                reader.readAsDataURL(fileInput);
+            } else if (urlInput) {
+                gallery.push({ id: Date.now(), title, url: urlInput });
+                clearGalleryForm();
+                saveDataToLocalStorage();
                 renderAllData();
+            } else {
+                alert('অনুগ্রহ করে ছবি নির্বাচন করুন বা অনলাইন ইউআরএল দিন!');
             }
         }
-        function deleteGallery(id) { gallery = gallery.filter(g => g.id !== id); renderAllData(); }
+
+        function clearGalleryForm() {
+            document.getElementById('add-gal-title').value = '';
+            document.getElementById('add-gal-url').value = '';
+            document.getElementById('add-gal-file').value = '';
+        }
+
+        function deleteGallery(id) { 
+            gallery = gallery.filter(g => g.id !== id); 
+            saveDataToLocalStorage();
+            renderAllData(); 
+        }
 
         function addNotice() {
             const title = document.getElementById('add-not-title').value;
@@ -493,10 +563,15 @@
                 notices.push({ id: Date.now(), title, body, date: "আজ" });
                 document.getElementById('add-not-title').value = '';
                 document.getElementById('add-not-body').value = '';
+                saveDataToLocalStorage();
                 renderAllData();
             }
         }
-        function deleteNotice(id) { notices = notices.filter(n => n.id !== id); renderAllData(); }
+        function deleteNotice(id) { 
+            notices = notices.filter(n => n.id !== id); 
+            saveDataToLocalStorage();
+            renderAllData(); 
+        }
 
         function handlePublicRegister(e) {
             e.preventDefault();
@@ -505,6 +580,7 @@
                 phone: document.getElementById('reg-phone').value,
                 address: document.getElementById('reg-address').value
             });
+            saveDataToLocalStorage();
             renderAllData();
             alert('আপনার রেজিস্ট্রেশন আবেদন জমা হয়েছে!');
             e.target.reset();
@@ -514,12 +590,14 @@
             const app = applications[idx];
             members.push({ id: Date.now(), name: app.name, role: "সদস্য (" + app.phone + ")" });
             applications.splice(idx, 1);
+            saveDataToLocalStorage();
             renderAllData();
             alert('আবেদন অনুমোদিত হয়েছে এবং সদস্য তালিকায় যুক্ত করা হয়েছে!');
         }
 
         function rejectReg(idx) {
             applications.splice(idx, 1);
+            saveDataToLocalStorage();
             renderAllData();
         }
 
@@ -529,6 +607,7 @@
             contactData.address = document.getElementById('edit-address').value;
             contactData.fb = document.getElementById('edit-fb').value;
             contactData.yt = document.getElementById('edit-yt').value;
+            saveDataToLocalStorage();
             renderAllData();
             alert('যোগাযোগ তথ্য সেভ করা হয়েছে!');
         }
@@ -537,7 +616,9 @@
             const pass = document.getElementById('edit-admin-pass').value;
             if(pass) {
                 currentAdminPass = pass;
+                saveDataToLocalStorage();
                 alert('পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে!');
+                document.getElementById('edit-admin-pass').value = '';
             }
         }
 
@@ -556,4 +637,4 @@
         renderAllData();
     </script>
 </body>
-                                                         </html>
+                    </html>

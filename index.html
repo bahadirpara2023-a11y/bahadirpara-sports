@@ -4,593 +4,200 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>বাহাদির পাড়া স্পোর্টস কাউন্সিল</title>
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Base Variables & Theme */
-        :root {
-            --primary-green: #0a4d2e;
-            --primary-dark: #05331e;
-            --accent-gold: #d4af37;
-            --gold-hover: #b89628;
-            --bg-white: #ffffff;
-            --bg-light: #f4f7f5;
-            --text-dark: #222222;
-            --text-muted: #666666;
-        }
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f8;
+            color: #333;
             line-height: 1.6;
+            width: 100%;
+            overflow-x: hidden;
         }
 
-        /* Top Bar & Header */
-        .header {
-            background-color: var(--primary-green);
-            color: var(--bg-white);
-            padding: 15px 5%;
+        /* হেডার সেকশন */
+        header {
+            background-color: #0b5d37;
+            color: #fff;
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 4px solid var(--accent-gold);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 20px;
-            font-weight: bold;
-            color: var(--accent-gold);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
+            flex-wrap: wrap;
             gap: 15px;
         }
 
-        .nav-links a {
-            color: var(--bg-white);
-            text-decoration: none;
-            font-weight: 600;
-            padding: 8px 12px;
-            border-radius: 4px;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            background-color: var(--accent-gold);
-            color: var(--primary-dark);
-        }
-
-        .btn-admin-switch {
-            background-color: var(--accent-gold);
-            color: var(--primary-dark);
-            padding: 8px 16px;
-            border: none;
-            border-radius: 20px;
+        .logo {
+            font-size: 1.2rem;
             font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
+            color: #f1c40f;
         }
 
-        .btn-admin-switch:hover {
-            background-color: var(--gold-hover);
+        nav {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
-        /* Hero Banner */
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .admin-btn {
+            background-color: #f1c40f;
+            color: #0b5d37;
+            padding: 6px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        /* হিরো সেকশন */
         .hero {
-            background: linear-gradient(rgba(10, 77, 46, 0.85), rgba(5, 51, 30, 0.9)), 
-                        url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
+            background-color: #0b5d37;
+            color: #ffffff;
             text-align: center;
-            padding: 80px 20px;
+            padding: 50px 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
 
         .hero h1 {
-            font-size: 38px;
-            color: var(--accent-gold);
-            margin-bottom: 10px;
+            color: #f1c40f;
+            font-size: 2rem;
+            margin-bottom: 15px;
         }
 
         .hero p {
-            font-size: 18px;
-            margin-bottom: 20px;
+            max-width: 600px;
+            margin: 0 auto 20px auto;
+            font-size: 1rem;
         }
 
-        .btn-gold {
-            background-color: var(--accent-gold);
-            color: var(--primary-dark);
-            padding: 12px 24px;
+        .btn-join {
+            display: inline-block;
+            background-color: #f1c40f;
+            color: #0b5d37;
+            padding: 10px 20px;
             text-decoration: none;
             font-weight: bold;
             border-radius: 5px;
-            display: inline-block;
-            border: none;
-            cursor: pointer;
         }
 
-        .btn-gold:hover {
-            background-color: var(--gold-hover);
-        }
-
-        /* Container & Sections */
+        /* মূল কন্টেন্ট ও কার্ডস */
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 30px auto;
             padding: 0 20px;
         }
 
         .section-title {
-            text-align: center;
-            color: var(--primary-green);
-            font-size: 28px;
-            margin-bottom: 25px;
-            position: relative;
+            color: #0b5d37;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #0b5d37;
+            display: inline-block;
+            padding-bottom: 5px;
         }
 
-        .section-title::after {
-            content: '';
-            width: 60px;
-            height: 4px;
-            background-color: var(--accent-gold);
-            display: block;
-            margin: 8px auto 0;
-            border-radius: 2px;
-        }
-
-        .grid {
+        .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
         }
 
         .card {
-            background: var(--bg-white);
+            background: #ffffff;
+            border: 2px solid #0b5d37;
+            border-radius: 8px;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border-top: 4px solid var(--primary-green);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        /* Forms */
-        .form-group {
-            margin-bottom: 15px;
+        .card h3 {
+            color: #0b5d37;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        /* Footer */
-        .footer {
-            background-color: var(--primary-dark);
-            color: var(--bg-white);
-            padding: 30px 5%;
-            margin-top: 50px;
-            border-top: 4px solid var(--accent-gold);
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .social-links a {
-            color: var(--accent-gold);
-            font-size: 20px;
-            margin-right: 15px;
-        }
-
-        /* Admin Layout */
-        .admin-wrapper {
-            display: none;
-            min-height: 100vh;
-        }
-
-        .admin-sidebar {
-            width: 250px;
-            background-color: var(--primary-dark);
-            color: white;
-            padding: 20px 0;
-            position: fixed;
-            height: 100vh;
-        }
-
-        .admin-sidebar h3 {
+        /* ফুটার সেকশন */
+        footer {
+            background-color: #0b5d37;
+            color: #ffffff;
             text-align: center;
-            color: var(--accent-gold);
-            margin-bottom: 20px;
-            padding: 0 10px;
-            font-size: 16px;
+            padding: 20px;
+            margin-top: 40px;
         }
 
-        .admin-menu {
-            list-style: none;
+        footer p {
+            font-size: 0.9rem;
         }
 
-        .admin-menu li a {
-            display: block;
-            padding: 12px 20px;
-            color: white;
-            text-decoration: none;
-            transition: 0.3s;
-        }
+        /* মোবাইল ডিসপ্লের জন্য নিয়ম */
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
 
-        .admin-menu li a:hover, .admin-menu li a.active {
-            background-color: var(--primary-green);
-            border-left: 4px solid var(--accent-gold);
-        }
+            nav {
+                justify-content: center;
+            }
 
-        .admin-content {
-            margin-left: 250px;
-            padding: 30px;
-            width: calc(100% - 250px);
-        }
-
-        /* Password Modal Styling */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-box {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 350px;
-            text-align: center;
-            border-top: 5px solid var(--accent-gold);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        .modal-box h3 {
-            color: var(--primary-green);
-            margin-bottom: 15px;
-        }
-
-        .modal-box input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .modal-btns {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 10px;
-        }
-
-        .btn-cancel {
-            background: #ccc;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        /* Dynamic View Control */
-        .page-section {
-            display: none;
-        }
-        .page-section.active {
-            display: block;
+            .hero h1 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- ================= PUBLIC WEBSITE ================= -->
-    <div id="public-site">
-        <!-- Header -->
-        <header class="header">
-            <div class="logo">
-                <i class="fas fa-trophy"></i>
-                <span>বাহাদির পাড়া স্পোর্টস কাউন্সিল</span>
+    <header>
+        <div class="logo">🏆 বাহাদির পাড়া স্পোর্টস কাউন্সিল</div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">About Us</a>
+            <a href="#">Members</a>
+            <a href="#" class="admin-btn">🔒 Admin Panel</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>বাহাদির পাড়া স্পোর্টস কাউন্সিলে স্বাগতম</h1>
+        <p>খেলাধুলার মাধ্যমে সুস্থ দেহ, সুন্দর মন ও সুসংগঠিত সমাজ গড়ার প্রত্যয়ে আমাদের যাত্রা।</p>
+        <a href="#" class="btn-join">আজই সদস্য হন</a>
+    </section>
+
+    <div class="container">
+        <h2 class="section-title">সংগঠনের সংক্ষিপ্ত পরিচিতি</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <h3>🎯 আমাদের লক্ষ্য</h3>
+                <p>বাহাদির পাড়ার তরুণ সমাজকে খেলাধুলার প্রতি আগ্রহী করা এবং পেশাদার খেলোয়াড় তৈরি করা।</p>
             </div>
-            <ul class="nav-links">
-                <li><a href="#" onclick="showSection('home')" class="active">Home</a></li>
-                <li><a href="#" onclick="showSection('about')">About Us</a></li>
-                <li><a href="#" onclick="showSection('members')">Members</a></li>
-                <li><a href="#" onclick="showSection('gallery')">Gallery</a></li>
-                <li><a href="#" onclick="showSection('notice')">Notice</a></li>
-                <li><a href="#" onclick="showSection('register')">Registration</a></li>
-                <li><a href="#" onclick="showSection('contact')">Contact Us</a></li>
-            </ul>
-            <button class="btn-admin-switch" onclick="openLoginModal()">
-                <i class="fas fa-lock"></i> Admin Panel
-            </button>
-        </header>
-
-        <!-- Home Section -->
-        <section id="home" class="page-section active">
-            <div class="hero">
-                <h1>বাহাদির পাড়া স্পোর্টস কাউন্সিলে স্বাগতম</h1>
-                <p>খেলাধুলার মাধ্যমে সুস্থ দেহ, সুন্দর মন ও সুসংগঠিত সমাজ গড়ার প্রত্যয়ে আমাদের যাত্রা।</p>
-                <a href="#" onclick="showSection('register')" class="btn-gold">আজই সদস্য হোন</a>
+            <div class="card">
+                <h3>⚽ খেলার ইভেন্ট</h3>
+                <p>ফুটবল, ক্রিকেট, ব্যাডমিন্টনসহ বিভিন্ন বার্ষিক টুর্নামেন্ট নিয়মিত আয়োজিত হয়।</p>
             </div>
-
-            <div class="container">
-                <h2 class="section-title">সংগঠনের সংক্ষিপ্ত পরিচিতি</h2>
-                <div class="grid">
-                    <div class="card">
-                        <h3><i class="fas fa-bullseye" style="color:var(--accent-gold)"></i> আমাদের লক্ষ্য</h3>
-                        <p>বাহাদির পাড়ার তরুণ সমাজকে খেলাধুলার প্রতি আগ্রহী করা এবং পেশাদার খেলোয়াড় তৈরি করা।</p>
-                    </div>
-                    <div class="card">
-                        <h3><i class="fas fa-running" style="color:var(--accent-gold)"></i> খেলার ইভেন্ট</h3>
-                        <p>ফুটবল, ক্রিকেট, ব্যাডমিন্টনসহ বিভিন্ন বার্ষিক টুর্নামেন্ট নিয়মিত আয়োজিত হয়।</p>
-                    </div>
-                    <div class="card">
-                        <h3><i class="fas fa-users" style="color:var(--accent-gold)"></i> সামাজিক কাজ</h3>
-                        <p>যুবসমাজকে মাদকমুক্ত রাখতে এবং স্বাস্থ্য সচেতনতা বাড়াতে সামাজিক ও ক্রীড়া কার্যক্রম।</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Us Section -->
-        <section id="about" class="page-section">
-            <div class="container">
-                <h2 class="section-title">About Us / আমাদের কথা</h2>
-                <div class="card" style="margin-bottom: 20px;">
-                    <h3>সংগঠনের ইতিহাস</h3>
-                    <p>বাহাদির পাড়া স্পোর্টস কাউন্সিল এলাকার ক্রীড়াপ্রেমী মানুষদের উদ্যোগে গঠিত একটি ঐতিহ্যবাহী সংগঠন। তরুণদের শারীরিক ও মানসিক বিকাশে এটি সবসময় অগ্রণী ভূমিকা পালন করে আসছে।</p>
-                </div>
-                <h3 style="color:var(--primary-green); margin-bottom:15px;">পরিচালনা কমিটি</h3>
-                <div class="grid">
-                    <div class="card">
-                        <h4>সভাপতি</h4>
-                        <p>মোঃ রফিকুল ইসলাম</p>
-                    </div>
-                    <div class="card">
-                        <h4>সেক্রেটারি</h4>
-                        <p>আহমেদ জাহিদ</p>
-                    </div>
-                    <div class="card">
-                        <h4>উপদেষ্টা</h4>
-                        <p>প্রফেসর আব্দুল করিম</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Members Section -->
-        <section id="members" class="page-section">
-            <div class="container">
-                <h2 class="section-title">সদস্যদের তালিকা</h2>
-                <div class="grid">
-                    <div class="card">
-                        <i class="fas fa-user-circle fa-3x" style="color: var(--primary-green);"></i>
-                        <h4 style="margin-top:10px;">সাকিব হাসান</h4>
-                        <p>সদস্য ID: #101</p>
-                    </div>
-                    <div class="card">
-                        <i class="fas fa-user-circle fa-3x" style="color: var(--primary-green);"></i>
-                        <h4 style="margin-top:10px;">তামিম আহমেদ</h4>
-                        <p>সদস্য ID: #102</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Gallery Section -->
-        <section id="gallery" class="page-section">
-            <div class="container">
-                <h2 class="section-title">Gallery / ফটো ও ভিডিও</h2>
-                <div class="grid">
-                    <div class="card">
-                        <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=400&q=80" alt="ফুটবল" style="width:100%; border-radius:5px;">
-                        <h4 style="margin-top:10px;">বার্ষিক ফুটবল টুর্নামেন্ট</h4>
-                    </div>
-                    <div class="card">
-                        <img src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=400&q=80" alt="ক্রিকেট" style="width:100%; border-radius:5px;">
-                        <h4 style="margin-top:10px;">ক্রিকেট চ্যাম্পিয়নশিপ</h4>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Notice Section -->
-        <section id="notice" class="page-section">
-            <div class="container">
-                <h2 class="section-title">গুরুত্বপূর্ণ নোটিশ</h2>
-                <div class="card">
-                    <span style="color:var(--accent-gold); font-weight:bold;">অক্টোবর ২০, ২০২৬</span>
-                    <h3>বার্ষিক ফুটবল রেজিস্ট্রেশন শুরু!</h3>
-                    <p>বাহাদির পাড়া স্পোর্টস কাউন্সিলের আগামী টুর্নামেন্টের জন্য নতুন সদস্য রেজিস্ট্রেশন ফর্ম পূরণ শুরু হয়েছে।</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Registration Section -->
-        <section id="register" class="page-section">
-            <div class="container">
-                <h2 class="section-title">নতুন সদস্য হওয়ার আবেদন</h2>
-                <div class="card" style="max-width: 600px; margin:0 auto;">
-                    <form onsubmit="event.preventDefault(); alert('আপনার রেজিস্ট্রেশন আবেদন সফলভাবে জমা হয়েছে!');">
-                        <div class="form-group">
-                            <label>পূর্ণ নাম</label>
-                            <input type="text" placeholder="আপনার নাম লিখুন" required>
-                        </div>
-                        <div class="form-group">
-                            <label>ফোন নম্বর</label>
-                            <input type="tel" placeholder="017xxxxxxxx" required>
-                        </div>
-                        <div class="form-group">
-                            <label>ই-মেইল</label>
-                            <input type="email" placeholder="example@mail.com">
-                        </div>
-                        <button type="submit" class="btn-gold" style="width: 100%;">আবেদন জমা দিন</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="page-section">
-            <div class="container">
-                <h2 class="section-title">Contact Us / যোগাযোগ</h2>
-                <div class="grid">
-                    <div class="card">
-                        <h3><i class="fas fa-map-marker-alt" style="color:var(--accent-gold)"></i> ঠিকানা</h3>
-                        <p>বাহাদির পাড়া, ঢাকা, বাংলাদেশ</p>
-                    </div>
-                    <div class="card">
-                        <h3><i class="fas fa-phone" style="color:var(--accent-gold)"></i> ফোন ও ই-মেইল</h3>
-                        <p>+880 1700-000000</p>
-                        <p>info@bahadirparasportscouncil.com</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-content">
-                <div>
-                    <h3>বাহাদির পাড়া স্পোর্টস কাউন্সিল</h3>
-                    <p>সকল স্বত্ব সংরক্ষিত © ২০২৬</p>
-                </div>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-        </footer>
-    </div>
-
-
-    <!-- ================= ADMIN LOGIN MODAL ================= -->
-    <div id="login-modal" class="modal-overlay">
-        <div class="modal-box">
-            <h3><i class="fas fa-user-shield"></i> এডমিন লগইন</h3>
-            <p style="font-size: 14px; color: var(--text-muted);">এডমিন প্যানেলে প্রবেশ করতে পাসওয়ার্ড দিন</p>
-            <input type="password" id="admin-pass" placeholder="পাসওয়ার্ড লিখুন">
-            <p id="error-msg" style="color: red; font-size: 13px; display: none; margin-bottom: 5px;">ভুল পাসওয়ার্ড!</p>
-            <div class="modal-btns">
-                <button onclick="checkAdminPassword()" class="btn-gold">লগইন</button>
-                <button onclick="closeLoginModal()" class="btn-cancel">বাতিল</button>
+            <div class="card">
+                <h3>মে সামাজিক কাজ</h3>
+                <p>যুবসমাজকে মাদকমুক্ত রাখতে এবং স্বাস্থ্য সচেতনতা বাড়াতে সামাজিক ও ক্রীড়া কার্যক্রম।</p>
             </div>
         </div>
     </div>
 
+    <footer>
+        <p>বাহাদির পাড়া স্পোর্টস কাউন্সিল &copy; ২০২৬ | সকল স্বত্ব সংরক্ষিত</p>
+    </footer>
 
-    <!-- ================= ADMIN PANEL ================= -->
-    <div id="admin-panel" class="admin-wrapper">
-        <div class="admin-sidebar">
-            <h3><i class="fas fa-user-shield"></i> বাহাদির পাড়া Admin</h3>
-            <ul class="admin-menu">
-                <li><a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                <li><a href="#"><i class="fas fa-home"></i> Home Mgmt</a></li>
-                <li><a href="#"><i class="fas fa-users"></i> Members (Pending)</a></li>
-                <li><a href="#"><i class="fas fa-images"></i> Gallery Mgmt</a></li>
-                <li><a href="#"><i class="fas fa-bullhorn"></i> Notice Mgmt</a></li>
-                <li><a href="#"><i class="fas fa-cog"></i> Website Settings</a></li>
-                <li><a href="#" onclick="logoutAdmin()" style="color:#ff6b6b;"><i class="fas fa-sign-out-alt"></i> Logout / Website View</a></li>
-            </ul>
-        </div>
-
-        <div class="admin-content">
-            <h2 style="color:var(--primary-green); margin-bottom: 20px;">📊 Dashboard Overview</h2>
-            <div class="grid">
-                <div class="card" style="border-top-color: var(--accent-gold);">
-                    <h3>মোট সদস্য</h3>
-                    <p style="font-size:30px; font-weight:bold; color:var(--primary-green)">১২৪ জন</p>
-                </div>
-                <div class="card" style="border-top-color: var(--accent-gold);">
-                    <h3>পেন্ডিং রেজিস্ট্রেশন</h3>
-                    <p style="font-size:30px; font-weight:bold; color:#d9534f">৫ টি</p>
-                </div>
-                <div class="card" style="border-top-color: var(--accent-gold);">
-                    <h3>মোট গ্যালা‌রি ছবি</h3>
-                    <p style="font-size:30px; font-weight:bold; color:var(--primary-green)">৪৮ টি</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- JavaScript logic -->
-    <script>
-        // Default Admin Password
-        const ADMIN_PASSWORD = "admin123";
-
-        function showSection(sectionId) {
-            const sections = document.querySelectorAll('.page-section');
-            sections.forEach(sec => sec.classList.remove('active'));
-
-            document.getElementById(sectionId).classList.add('active');
-
-            const links = document.querySelectorAll('.nav-links a');
-            links.forEach(link => link.classList.remove('active'));
-            if(event && event.target) {
-                event.target.classList.add('active');
-            }
-        }
-
-        // Modal Controls
-        function openLoginModal() {
-            document.getElementById('login-modal').style.display = 'flex';
-            document.getElementById('admin-pass').value = '';
-            document.getElementById('error-msg').style.display = 'none';
-        }
-
-        function closeLoginModal() {
-            document.getElementById('login-modal').style.display = 'none';
-        }
-
-        // Password Verification
-        function checkAdminPassword() {
-            const inputPass = document.getElementById('admin-pass').value;
-            if (inputPass === ADMIN_PASSWORD) {
-                closeLoginModal();
-                document.getElementById('public-site').style.display = 'none';
-                document.getElementById('admin-panel').style.display = 'flex';
-            } else {
-                document.getElementById('error-msg').style.display = 'block';
-            }
-        }
-
-        // Admin Logout
-        function logoutAdmin() {
-            document.getElementById('public-site').style.display = 'block';
-            document.getElementById('admin-panel').style.display = 'none';
-        }
-    </script>
 </body>
 </html>
